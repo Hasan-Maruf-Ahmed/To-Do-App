@@ -16,15 +16,28 @@ button.addEventListener('click', () => {
         li .appendChild(span);
     }
     inputBox.value = '';
+    saveData();
 });
 
 taskList.addEventListener("click", (e) => {
     if(e.target.tagName === "LI")
     {
         e.target.classList.toggle("checked");
+        saveData();
     }
     else if(e.target.tagName === "SPAN")
     {
         e.target.parentElement.remove();
+        saveData();
     }
-})
+}, false);
+
+function saveData(){
+    localStorage.setItem("data", taskList.innerHTML);
+}
+
+function showData(){
+    taskList.innerHTML = localStorage.getItem("data");
+}
+
+showData();
